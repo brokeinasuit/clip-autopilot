@@ -156,7 +156,11 @@ def main(argv=None):
     elif cmd == "clean" and len(a) == 2:
         cmd_clean(ws, a[1])
     else:
-        die(__doc__)
+        try:  # Clip Autopilot Pro adds its commands here when installed
+            from clipauto_pro.cli import main as pro_main
+        except ImportError:
+            die(__doc__)
+        pro_main(ws, a, {"ids": ids, "n": n})
 
 
 if __name__ == "__main__":
