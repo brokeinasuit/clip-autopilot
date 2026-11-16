@@ -94,12 +94,10 @@ def cut_one(src, words, m, out):
             graph.append(f"[v{k - 1}][{k}:v]overlay=x={x}:y={y}:enable='between(t,{a},{b})'[v{k}]")
         graph.append(f"[v{len(layers)}]null[v]")
         graph.append("[0:a]loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[a]")
-        script = tmp / "graph.txt"
-        script.write_text(";\n".join(graph), encoding="utf-8")
         cmd = [ffmpeg(), "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{start}", "-t", f"{dur}", "-i", str(src)]
         for p, *_ in layers:
             cmd += ["-i", str(p)]
-        cmd += ["-filter_complex_script", str(script), "-map", "[v]", "-map", "[a]",
+        cmd += ["-filter_complex", ";".join(graph), "-map", "[v]", "-map", "[a]",
                 "-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p",
                 "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-t", f"{dur}", str(out)]
         r = run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
