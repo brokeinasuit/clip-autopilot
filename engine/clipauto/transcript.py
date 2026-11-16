@@ -29,11 +29,22 @@ def from_json3(path):
     return [w for w in words if not re.fullmatch(r"\[.*\]", w["w"])]  # [Music], [Applause]
 
 
+def load_audio(media, sr=16000):
+    """Decode with ffmpeg to 16 kHz mono float32. Avoids PyAV, whose API changes break faster-whisper's own decoder."""
+    import numpy as np
+    from .env import ffmpeg, run
+    r = run([ffmpeg(), "-hide_banner", "-loglevel", "error", "-i", str(media), "-vn", "-ac", "1", "-ar", str(sr),
+             "-f", "s16le", "-"], capture_output=True)
+    if r.returncode != 0 or not r.stdout:
+        raise RuntimeError(f"could not read the audio of {media}: {r.stderr.decode(errors='replace')[-400:]}")
+    return np.frombuffer(r.stdout, np.int16).astype(np.float32) / 32768.0
+
+
 def from_whisper(media, model=DEFAULT_MODEL):
     from faster_whisper import WhisperModel
     print(f"transcribing with whisper ({model}) on this computer, first run downloads the model...")
     wm = WhisperModel(model, device="auto", compute_type="int8", cpu_threads=max(1, (os.cpu_count() or 4) - 1))
-    segments, _ = wm.transcribe(str(media), word_timestamps=True, vad_filter=True,
+    segments, _ = wm.transcribe(load_audio(media), word_timestamps=True, vad_filter=True,
                                 language="en" if model.endswith(".en") else None)
     words = []
     for seg in segments:

@@ -6,6 +6,7 @@
                                           download, transcript, top moments -> work/<id>/moments.json
   preview <work-id>                       one frame per moment in work/<id>/preview/ (to set crop_x)
   cut <work-id> [--ids 1,4]               plain 9:16 clips with captions -> clips/<campaign>/
+  probe <file>                            JSON: width, height, duration (to check a clip)
   list                                    work folders and their state
   clean <work-id>                         delete the source video (keeps transcript + moments)
 
@@ -146,6 +147,10 @@ def main(argv=None):
     elif cmd == "cut" and len(a) == 2:
         from .cut import run_cut
         run_cut(ws, a[1], ids)
+    elif cmd == "probe" and len(a) == 2:
+        from .env import duration, video_size
+        w, h = video_size(a[1])
+        print(json.dumps({"width": w, "height": h, "duration": round(duration(a[1]), 3)}))
     elif cmd == "list":
         cmd_list(ws)
     elif cmd == "clean" and len(a) == 2:

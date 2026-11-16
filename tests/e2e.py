@@ -47,9 +47,8 @@ def main():
         sh(CA, "cut", wdir.name, cwd=ws)
         clips = list((ws / "clips" / "e2e").rglob("e2e-test-clip.mp4"))
         assert len(clips) == 1, clips
-        sys.path.insert(0, str(REPO / "engine"))
-        from clipauto.env import duration, video_size
-        size, dur = video_size(clips[0]), duration(clips[0])
+        info = json.loads(sh(CA, "probe", clips[0]).strip().splitlines()[-1])
+        size, dur = (info["width"], info["height"]), info["duration"]
         print(f"clip: {size} {dur:.1f} s")
         assert size == (1080, 1920), size
         assert abs(dur - (m["end"] - m["start"])) < 1.0, (dur, m)
