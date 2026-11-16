@@ -22,17 +22,17 @@ def vpy():
 
 def main():
     if sys.version_info < (3, 9):
-        print(f"Python {sys.version.split()[0]} is too old: install Python 3.9+ from python.org and run this again.")
+        print(f"Python {sys.version.split()[0]} is too old: install Python 3.9+ from python.org and run this again.", flush=True)
         return 1
     HOME.mkdir(parents=True, exist_ok=True)
     if not vpy().exists():
-        print(f"creating environment in {VENV} ...")
+        print(f"creating environment in {VENV} ...", flush=True)
         venv.EnvBuilder(with_pip=True, clear=False).create(VENV)
-    print("installing / updating packages (first time takes a few minutes) ...")
+    print("installing / updating packages (first time takes a few minutes) ...", flush=True)
     subprocess.run([str(vpy()), "-m", "pip", "install", "--quiet", "--upgrade", "pip"], check=False)
     r = subprocess.run([str(vpy()), "-m", "pip", "install", "--quiet", "--upgrade", *REQ])
     if r.returncode != 0:
-        print("package install failed: see the error above. /clip-fix can help.")
+        print("package install failed: see the error above. /clip-fix can help.", flush=True)
         return 1
     here = Path(__file__).resolve().parent
     return subprocess.run([str(vpy()), str(here / "ca.py"), "doctor"]).returncode

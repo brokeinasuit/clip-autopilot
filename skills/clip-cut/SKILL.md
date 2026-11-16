@@ -1,9 +1,11 @@
 ---
 name: clip-cut
-description: Cut the chosen moments into ready 9:16 vertical clips (1080x1920, 30 fps) with bold word-by-word captions, the hook on screen for the first 3 seconds, and loudness set to -14 LUFS, saved per campaign with a notes file. Use after clip-find, or when the user says "cut the clips", "render", "make the clips", "export", "make them vertical".
+description: Cut the chosen moments into ready 9:16 vertical clips (1080x1920, 30 fps) with bold word-by-word captions, the hook on screen for the first 3 seconds, and loudness evened out to about -14 LUFS, saved per campaign with a notes file. Use after clip-find, or when the user says "cut the clips", "render", "make the clips", "export", "make them vertical".
 ---
 
 # Clip Autopilot: cut clips
+
+> `PY` below = the Python command that worked in clip-setup (`python3` on macOS; `py`, else `python`, on Windows). `${CLAUDE_PLUGIN_ROOT}` is this plugin's folder; if it comes out empty, use the folder that contains `scripts/ca.py` under `~/.claude/plugins`. On Windows PowerShell, start the command with `& ` when the first word is quoted.
 
 ## Steps
 
@@ -17,11 +19,12 @@ description: Cut the chosen moments into ready 9:16 vertical clips (1080x1920, 3
 
 3. **Check every clip before you hand it over.** For each output line:
    - A `WARNING ... outside the campaign's ... s` line: fix that moment's start/end in moments.json and cut it again with `--ids`.
-   - Grab a frame to look at framing and captions:
+   - Grab frames to check framing and captions (works on Mac and Windows, no system ffmpeg needed):
      ```
-     ffmpeg -ss 1.5 -i "<clip>.mp4" -frames:v 1 -y "<clip>-check.jpg"
+     PY "${CLAUDE_PLUGIN_ROOT}/scripts/ca.py" frame "<clip>.mp4" 1.5
+     PY "${CLAUDE_PLUGIN_ROOT}/scripts/ca.py" frame "<clip>.mp4" 8
      ```
-     (if `ffmpeg` is not on PATH, skip this and ask the user to open the clip). Look at it: is the speaker's face inside the frame, is the caption readable? Wrong framing: change `crop_x` and recut. Delete the check jpg afterwards.
+     Open each jpg it prints and look at it: is the speaker's face inside the frame, is any on-screen text cut off, is the caption readable and spelled right? Wrong framing: change `crop_x` and recut. Wrong caption word: tell the user (or re-run find with a bigger `--model`). Delete the frame jpgs afterwards.
 
 4. **Hand over** in a few lines: where the clips are (`clips/<campaign>/<date>-<slug>/`), each file with its length and hook, and the posting reminder from RULES.md (required tag, caption text, submit window). Each clip folder has a `.txt` with the source and the rules reminder.
 

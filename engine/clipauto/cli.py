@@ -7,6 +7,7 @@
   preview <work-id>                       one frame per moment in work/<id>/preview/ (to set crop_x)
   cut <work-id> [--ids 1,4]               plain 9:16 clips with captions -> clips/<campaign>/
   probe <file>                            JSON: width, height, duration (to check a clip)
+  frame <clip> <seconds> [out.jpg]        save one frame as a jpg (to look at framing and captions)
   list                                    work folders and their state
   clean <work-id>                         delete the source video (keeps transcript + moments)
 
@@ -151,6 +152,11 @@ def main(argv=None):
         from .env import duration, video_size
         w, h = video_size(a[1])
         print(json.dumps({"width": w, "height": h, "duration": round(duration(a[1]), 3)}))
+    elif cmd == "frame" and len(a) in (3, 4):
+        out = Path(a[3]) if len(a) == 4 else Path(a[1]).with_name(Path(a[1]).stem + f"-frame-{a[2]}s.jpg")
+        run([ffmpeg(), "-hide_banner", "-loglevel", "error", "-y", "-ss", a[2], "-i", a[1], "-frames:v", "1",
+             "-vf", "scale=540:-2", str(out)], check=True)
+        print(out)
     elif cmd == "list":
         cmd_list(ws)
     elif cmd == "clean" and len(a) == 2:

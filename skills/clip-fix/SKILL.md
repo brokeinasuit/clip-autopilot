@@ -5,6 +5,8 @@ description: Diagnose and fix Clip Autopilot problems on macOS or Windows - setu
 
 # Clip Autopilot: fix
 
+> `PY` below = the Python command that worked in clip-setup (`python3` on macOS; `py`, else `python`, on Windows). `${CLAUDE_PLUGIN_ROOT}` is this plugin's folder; if it comes out empty, use the folder that contains `scripts/ca.py` under `~/.claude/plugins`. On Windows PowerShell, start the command with `& ` when the first word is quoted.
+
 Work through this calmly. Run things yourself, explain in plain words, fix what you can, and only ask the user to do something you cannot (installing Python, freeing disk space).
 
 ## 1. Health check first
@@ -30,7 +32,9 @@ PY "${CLAUDE_PLUGIN_ROOT}/scripts/ca.py" doctor
 | Speaker cut off at the side | Run `preview`, set a better `crop_x` (0 left ... 1 right) in moments.json, cut again with `--ids`. |
 | Captions out of sync | YouTube auto-captions can drift: run find again with `--whisper`. |
 | Disk full | Run `ca.py clean <work-id>` on finished work, empty the trash. Sources are 0.5-3 GB each. |
+| Windows: very slow first run, or "blocked" | Windows Defender scans the new tools the first time; wait, or allow them when asked. |
+| Windows: files locked / sync errors | The folder is in OneDrive. Use a folder outside OneDrive, e.g. `C:\Clipping`. |
 | Permission denied writing files | Open Claude Code in a folder you own (e.g. Documents/Clipping), not a system folder. |
 
 ## 3. Still stuck
-Collect: the doctor output (last JSON line), the exact command and the last 20 lines of the error. Tell the user to post them in the Broke In A Suit Discord #help channel (link in the README), and never paste passwords or tokens there.
+Collect: the doctor output (last JSON line), the exact command and the last 20 lines of the error. Tell the user to post them in the Broke In A Suit Discord #help channel (invite link on the Gumroad page), and never paste passwords or tokens there.

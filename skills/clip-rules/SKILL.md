@@ -5,6 +5,8 @@ description: Turn a clipping campaign brief (Whop Content Rewards, Clipping.net,
 
 # Clip Autopilot: campaign rules
 
+> `PY` below = the Python command that worked in clip-setup (`python3` on macOS; `py`, else `python`, on Windows). `${CLAUDE_PLUGIN_ROOT}` is this plugin's folder; if it comes out empty, use the folder that contains `scripts/ca.py` under `~/.claude/plugins`. On Windows PowerShell, start the command with `& ` when the first word is quoted.
+
 Goal: one folder per campaign at `campaigns/<campaign-slug>/` in the workspace, with a filled `RULES.md`. The engine reads its top block; the user reads the checklist before every post.
 
 ## Steps
@@ -22,7 +24,7 @@ Goal: one folder per campaign at `campaigns/<campaign-slug>/` in the workspace, 
    - `pay_per_1k_views_usd`, `min_views_for_payout`, `max_payout_per_post_usd`, `budget_left_usd`, `audience_geo`
    - `min_length_s` / `max_length_s`: the brief's limits. If it gives none, keep 15 / 60 and say so.
    - `platforms`: comma list from tiktok, instagram, youtube
-   - `required_tag` (the @handles), `required_caption_text` (word for word, keep capitals and emojis), `hashtags`, `submit_within`
+   - `required_tag` (the @handles), `required_caption_text` (word for word, keep capitals and emojis; if it must come first, still write only the text, and note "caption must START with this" in the notes), `hashtags`, `submit_within`
    Leave a field empty when the brief does not say. Never invent a number.
 
 4. **Fill the notes below the block** (allowed sources, allowed edits, banned things, caption rules, account requirements, review time) in short bullets from the brief, quoting exact wording where wording matters.

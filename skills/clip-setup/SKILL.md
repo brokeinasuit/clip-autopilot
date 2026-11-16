@@ -5,6 +5,8 @@ description: First-time setup and health check for Clip Autopilot. Installs ever
 
 # Clip Autopilot: setup
 
+> `PY` below = the Python command that worked in clip-setup (`python3` on macOS; `py`, else `python`, on Windows). `${CLAUDE_PLUGIN_ROOT}` is this plugin's folder; if it comes out empty, use the folder that contains `scripts/ca.py` under `~/.claude/plugins`. On Windows PowerShell, start the command with `& ` when the first word is quoted.
+
 You are setting up the clipping engine for the user. They may not be technical: do the work yourself, explain in one short line per step, never dump long logs on them.
 
 ## Steps
@@ -15,6 +17,7 @@ You are setting up the clipping engine for the user. They may not be technical: 
    If none works, tell the user exactly this and stop:
    - macOS: "Install Python from https://www.python.org/downloads/ (the big yellow button), then tell me 'done'."
    - Windows: "Install Python from https://www.python.org/downloads/ and TICK 'Add python.exe to PATH' on the first screen, then tell me 'done'."
+   On a fresh Mac, `python3` may open a popup "install command line developer tools": tell the user "click Install, wait until it finishes, then tell me done", and try again.
    Remember which command worked (`PY` below) and use it in every other clip-* skill.
 
 2. **Run setup** (first run takes 2-5 minutes, it downloads packages):

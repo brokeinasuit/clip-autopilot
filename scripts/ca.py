@@ -17,7 +17,7 @@ def main():
         print("Clip Autopilot is not set up yet: run /clip-setup (or: python3 scripts/setup.py).")
         return 2
     if Path(sys.prefix).resolve() != VENV.resolve():
-        env = dict(os.environ, PYTHONPATH=str(ENGINE), PYTHONIOENCODING="utf-8")
+        env = dict(os.environ, PYTHONPATH=str(ENGINE), PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
         return subprocess.run([str(VPY), str(Path(__file__).resolve()), *sys.argv[1:]], env=env).returncode
     sys.path.insert(0, str(ENGINE))
     from clipauto.cli import main as cli

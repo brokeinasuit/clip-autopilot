@@ -6,6 +6,10 @@ faster-whisper with word timestamps (free, runs on your own computer, Mac or Win
 import json, os, re
 from pathlib import Path
 
+os.environ.setdefault("CT2_VERBOSE", "-1")  # hide ctranslate2 "Tip: ..." lines that look like errors
+os.environ.setdefault("HF_HUB_VERBOSITY", "error")
+os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
+
 DEFAULT_MODEL = os.environ.get("CLIP_WHISPER_MODEL", "small.en")
 
 
