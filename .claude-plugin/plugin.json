@@ -1,0 +1,10 @@
+{
+  "name": "clip-autopilot",
+  "version": "0.1.0",
+  "description": "Clip Autopilot Starter: paste a clipping campaign brief, give it a video, get the best moments cut into 9:16 clips with captions. Free. Everything up to ready-to-post; you post.",
+  "author": { "name": "Broke In A Suit", "url": "https://github.com/brokeinasuit" },
+  "homepage": "https://github.com/brokeinasuit/clip-autopilot",
+  "repository": "https://github.com/brokeinasuit/clip-autopilot",
+  "license": "MIT",
+  "keywords": ["clipping", "shorts", "tiktok", "reels", "whop", "content-rewards", "video", "captions"]
+}

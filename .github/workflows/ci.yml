@@ -1,0 +1,27 @@
+name: e2e
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+        python: ["3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Hide any preinstalled ffmpeg (buyers may not have one)
+        shell: bash
+        run: |
+          for p in $(which -a ffmpeg 2>/dev/null); do mv "$p" "$p.hidden" 2>/dev/null || true; done
+          which ffmpeg || echo "no system ffmpeg: engine must use imageio-ffmpeg"
+      - name: End to end
+        run: python tests/e2e.py

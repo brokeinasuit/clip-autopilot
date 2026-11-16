@@ -1,0 +1,15 @@
+{
+  "name": "brokeinasuit",
+  "description": "Clip Autopilot by Broke In A Suit",
+  "owner": { "name": "Broke In A Suit", "url": "https://github.com/brokeinasuit" },
+  "plugins": [
+    {
+      "name": "clip-autopilot",
+      "source": "./",
+      "description": "Free clipping kit for Claude Code: campaign rules, best-moment finder, 9:16 cuts with captions.",
+      "version": "0.1.0",
+      "category": "productivity",
+      "license": "MIT"
+    }
+  ]
+}
