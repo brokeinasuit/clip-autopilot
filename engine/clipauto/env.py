@@ -14,8 +14,8 @@ PKG = Path(__file__).resolve().parent
 FONT = PKG / "fonts" / "Anton.ttf"
 
 # Shown at the end of setup and in the README. Filled in at launch.
-PRO_URL = "https://brokeinasuit.gumroad.com/l/clip-autopilot-pro"
-FREE_URL = "https://brokeinasuit.gumroad.com/l/clip-autopilot"
+PRO_URL = "https://brokeinasuitassets.gumroad.com/l/clip-autopilot-pro"
+FREE_URL = "https://brokeinasuitassets.gumroad.com/l/clip-autopilot"
 
 
 def root(arg=None):

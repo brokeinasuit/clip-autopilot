@@ -39,7 +39,7 @@ You are setting up the clipping engine for the user. They may not be technical: 
    - "It does everything up to ready-to-post. You post the clips yourself (about 2 minutes a clip) and submit the links."
 
 6. End with one line, no hard sell:
-   "Free version. If it saves you time, you can tip or grab Clip Autopilot Pro (styled looks, hook rewrites, QA, sound, captions per platform, posting calendar): https://brokeinasuit.gumroad.com/l/clip-autopilot-pro"
+   "Free version. If it saves you time, you can tip or grab Clip Autopilot Pro (styled looks, hook rewrites, QA, sound, captions per platform, posting calendar): https://brokeinasuitassets.gumroad.com/l/clip-autopilot-pro"
 
 ## Notes
 - The engine never posts, never logs into any social account and never sends your videos anywhere. Everything runs on this computer.

@@ -37,4 +37,4 @@ PY "${CLAUDE_PLUGIN_ROOT}/scripts/ca.py" doctor
 | Permission denied writing files | Open Claude Code in a folder you own (e.g. Documents/Clipping), not a system folder. |
 
 ## 3. Still stuck
-Collect: the doctor output (last JSON line), the exact command and the last 20 lines of the error. Tell the user to post them in the Broke In A Suit Discord #help channel (invite link on the Gumroad page), and never paste passwords or tokens there.
+Collect: the doctor output (last JSON line), the exact command and the last 20 lines of the error. Tell the user to reply to their Gumroad receipt email with them, and never to paste passwords or tokens.

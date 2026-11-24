@@ -64,9 +64,9 @@ Something broken? Say **"fix clip autopilot"** or paste the error.
 | Posting calendar + earnings tracker (opens in your browser) | | yes |
 | Weekly "why did this flop" review | | yes |
 
-**Pro:** https://brokeinasuit.gumroad.com/l/clip-autopilot-pro
-**Tip jar / updates by email:** https://brokeinasuit.gumroad.com/l/clip-autopilot
-**Help and wins:** the Broke In A Suit Discord (invite link on the Gumroad page).
+**Pro:** https://brokeinasuitassets.gumroad.com/l/clip-autopilot-pro
+**Tip jar / updates by email:** https://brokeinasuitassets.gumroad.com/l/clip-autopilot
+**Help:** reply to your Gumroad receipt email (the free download sends one too).
 
 ## Good to know
 
